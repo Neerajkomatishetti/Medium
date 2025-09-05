@@ -20,6 +20,8 @@ node_modules/
 .env.production
 .dev.vars
 
+wrangler.jsonc
+
 # logs
 logs/
 *.log
@@ -31,3 +33,5 @@ lerna-debug.log*
 
 # misc
 .DS_Store
+
+/src/generated/prisma
