@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { PrismaClient } from '../generated/prisma/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { sign } from 'hono/jwt';
+import {signinInput} from '@neerajkn123/common';
 
 export const userRouter = new Hono<{
     Bindings:{
@@ -17,6 +18,8 @@ userRouter.post('/signup', async (c) =>{
     }).$extends(withAccelerate())
     
     const body = await c.req.json();
+    const { success } = signinInput.safeParse(body);
+
 
     try{
     const user = await Client.user.create({

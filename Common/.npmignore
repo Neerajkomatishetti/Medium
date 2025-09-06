@@ -1,0 +1,6 @@
+# Rules from: C:\Users\Xiaomi\Desktop\Medium\Common\.gitignore
+# Rules from: C:\Users\Xiaomi\Desktop\Medium\Common\.gitignore
+node_modules
+src
+tsconfig.json
+tsconfig.tsbuildinfo
