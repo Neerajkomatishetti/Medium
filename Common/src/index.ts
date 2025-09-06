@@ -1,12 +1,12 @@
 import zod from 'zod';
 
 export const signupInput = zod.object({
-    email:zod.email(),
+    email:zod.string(),
     password:zod.string().min(6),
     name:zod.string().optional()
 })
 export const signinInput = zod.object({
-    email:zod.email(),
+    email:zod.string(),
     password:zod.string().min(6),
     name:zod.string().optional()
 })

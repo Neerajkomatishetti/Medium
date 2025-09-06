@@ -6,12 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateInput = exports.postInput = exports.signinInput = exports.signupInput = void 0;
 const zod_1 = __importDefault(require("zod"));
 exports.signupInput = zod_1.default.object({
-    email: zod_1.default.email(),
+    email: zod_1.default.string(),
     password: zod_1.default.string().min(6),
     name: zod_1.default.string().optional()
 });
 exports.signinInput = zod_1.default.object({
-    email: zod_1.default.email(),
+    email: zod_1.default.string(),
     password: zod_1.default.string().min(6),
     name: zod_1.default.string().optional()
 });

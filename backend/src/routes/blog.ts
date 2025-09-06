@@ -2,6 +2,7 @@ import { withAccelerate } from '@prisma/extension-accelerate';
 import { Hono } from 'hono';
 import { PrismaClient } from '../generated/prisma/edge';
 import { verify } from 'hono/jwt';
+import { postInput, updateInput } from '@neerajkn123/common'
 
 export const blogRouter = new Hono<{
     Bindings:{
@@ -44,18 +45,27 @@ blogRouter.post('/',async (c)=>{
     const body = await c.req.json();
     const authorId = c.get('userId');
 
-    const Post = await Client.post.create({
-        data: {
-            title:body.title,
-            content:body.content,
-            authorId: authorId
-        }
-    })
-    
-    return c.json({
-        message:"success",
-        id:Post.id
-    },200)
+    const { success } = postInput.safeParse(body);
+
+    if(success){
+        const Post = await Client.post.create({
+            data: {
+                title:body.title,
+                content:body.content,
+                authorId: authorId
+            }
+        })
+        
+        return c.json({
+            message:"success",
+            id:Post.id
+        },200)
+    }else{
+        return c.json({
+            message:"invalid inputs"
+        }, 400)
+    }
+
 })
 
 blogRouter.put('/',async (c)=>{
@@ -64,20 +74,27 @@ blogRouter.put('/',async (c)=>{
         }).$extends(withAccelerate())
 
     const body = await c.req.json();
+    const { success } = updateInput.safeParse(body);
 
-    await Client.post.update({
-        where:{
+    if(success){
+        await Client.post.update({
+            where:{
+                id:body.id
+            },
+            data:{
+                title:body.title,
+                content:body.content
+            }
+        })
+    
+        return c.json({
             id:body.id
-        },
-        data:{
-            title:body.title,
-            content:body.content
-        }
-    })
-
-    return c.json({
-        id:body.id
-    })
+        })
+    }else{
+        return c.json({
+            message:"invalid inputs"
+        }, 400)
+    }
 })
 
 blogRouter.get('/bulk',async (c)=>{

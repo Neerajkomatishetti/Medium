@@ -3,6 +3,7 @@ import { PrismaClient } from '../generated/prisma/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { sign } from 'hono/jwt';
 import {signinInput} from '@neerajkn123/common';
+import {signupInput} from '@neerajkn123/common';
 
 export const userRouter = new Hono<{
     Bindings:{
@@ -18,31 +19,36 @@ userRouter.post('/signup', async (c) =>{
     }).$extends(withAccelerate())
     
     const body = await c.req.json();
-    const { success } = signinInput.safeParse(body);
+    const { success } = signupInput.safeParse(body);
 
+    if(success){
+        try{
+            const user = await Client.user.create({
+                data:{
+                    email:body.email,
+                    password:body.password,
+                    name:body.name
+                }
+            })
+        
+            const token = await sign({
+                id:user.id
+            }, c.env.JWT_SECRET);
+            return c.json({
+                token:token
+            },200)
+        
+            }catch(e){
+                return c.json({
+                    message:"error while signing up",
+                    error:e
+                }, 400)
+            }
 
-    try{
-    const user = await Client.user.create({
-        data:{
-            email:body.email,
-            password:body.password,
-            name:body.name
-        }
-    })
-
-    const token = await sign({
-        id:user.id
-    }, c.env.JWT_SECRET);
-    return c.json({
-        token:token
-    },200)
-
-    }catch(e){
-        return c.json({
-            message:"error while signing up",
-            error:e
-        }, 400)
+    }else{
+        return c.json({message:"invalid inputs"}, 400)
     }
+   
 })
 
 userRouter.post('/signin', async (c) =>{
@@ -51,29 +57,38 @@ userRouter.post('/signin', async (c) =>{
     }).$extends(withAccelerate())
     
     const body = await c.req.json();
+    const { success } = signinInput.safeParse(body);
 
-    try{
-    const user = await Client.user.findFirst({
-        where:{
-            email:body.email,
-            password:body.password,
-            name:body.name
-        }
-    })
-
-    if(user){
-        const token = await sign({ id:user.id }, c.env.JWT_SECRET);
-        return c.json({ token:token },200)
+    if(success){
+        try{
+            const user = await Client.user.findFirst({
+                where:{
+                    email:body.email,
+                    password:body.password,
+                    name:body.name
+                }
+            })
+        
+            if(user){
+                const token = await sign({ id:user.id }, c.env.JWT_SECRET);
+                return c.json({ token:token },200)
+        
+            }else{
+                return c.json({
+                    message:"user doesnot exists"
+                }, 403)
+            }
+        
+            }catch(e){
+                return c.json({
+                    message:"error while signing up"
+                }, 411)
+            }
 
     }else{
         return c.json({
-            message:"user doesnot exists"
-        }, 403)
+            message:"invalid inputs"
+        }, 400)
     }
-
-    }catch(e){
-        return c.json({
-            message:"error while signing up"
-        }, 411)
-    }
+   
 })
