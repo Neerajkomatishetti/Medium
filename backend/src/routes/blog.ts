@@ -104,7 +104,9 @@ blogRouter.get('/bulk',async (c)=>{
     
     try{
         const Posts = await Client.post.findMany({});
+        console.log(Posts)
         return c.json({Posts})
+
 
     }catch(e){
         return c.json({message:"error while fetching"}, 411)

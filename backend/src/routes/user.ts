@@ -18,10 +18,12 @@ userRouter.post('/signup', async (c) =>{
         datasourceUrl:c.env.DATABASE_URL
     }).$extends(withAccelerate())
     
-    const body = await c.req.json();
-    const { success } = signupInput.safeParse(body);
 
-    if(success){
+    const body = await c.req.json();
+    
+    const Zodresult = signupInput.safeParse(body);
+
+    if(Zodresult.success){
         try{
             const user = await Client.user.create({
                 data:{
@@ -46,7 +48,9 @@ userRouter.post('/signup', async (c) =>{
             }
 
     }else{
-        return c.json({message:"invalid inputs"}, 400)
+        return c.json({
+            errors:Zodresult.error.issues[0].message
+        }, 400)
     }
    
 })
@@ -57,9 +61,9 @@ userRouter.post('/signin', async (c) =>{
     }).$extends(withAccelerate())
     
     const body = await c.req.json();
-    const { success } = signinInput.safeParse(body);
+    const Zodresult = signinInput.safeParse(body);
 
-    if(success){
+    if(Zodresult.success){
         try{
             const user = await Client.user.findFirst({
                 where:{
@@ -87,7 +91,7 @@ userRouter.post('/signin', async (c) =>{
 
     }else{
         return c.json({
-            message:"invalid inputs"
+            error:Zodresult.error.issues[0].message
         }, 400)
     }
    
