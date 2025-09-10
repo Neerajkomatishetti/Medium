@@ -5,6 +5,7 @@ import { Home } from './pages/Home'
 import { Profile } from './pages/Profile'
 import { PublishStory } from './pages/PublishStory'
 import { useState } from 'react'
+import { ThemeProvider } from "@/components/theme-provider"
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
     <BrowserRouter>
       <Routes>
         <Route path='/Sign' element={<Sign/>}/>
@@ -24,6 +26,7 @@ function App() {
         <Route path='/Story' element={<PublishStory/>}/>
       </Routes>
     </BrowserRouter>
+    </ThemeProvider>
     
     </>
   )

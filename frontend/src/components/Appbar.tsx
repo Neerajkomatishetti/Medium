@@ -3,6 +3,7 @@ import { CardSign } from "./CardSign";
 import { Button } from "./ui/button";
 import SearchBar from "./Searchbar";
 import { useNavigate } from "react-router-dom";
+import { ModeToggle } from "./mode-toggle";
 
 type AppbarProps = { 
     pageType: string;
@@ -27,7 +28,7 @@ export const Appbar = ({pageType, toggle}: AppbarProps) =>{
     }
   
     return <>
-        <div className="flex flex- justify-between sticky top-0 z-10 w-full h-15 bg-white border border-b-slate-300">
+        <div className="flex flex- justify-between sticky top-0 z-10 w-full bg-background h-15 border border-b-border">
             <div className="flex items-center px-4 ">
                 <a className={pageType === "Home" || pageType === "Profile"? "mx-2 hover-elevate hover:cursor-pointer " : "hidden"} onClick={toggle}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
@@ -49,8 +50,11 @@ export const Appbar = ({pageType, toggle}: AppbarProps) =>{
                     ?"flex flex-row justify-between [&>*]:mx-2 pr-4"
                     : "hidden"
                     }>
-                    <Button className={pageType === "Story"? "bg-[#1a8917]":"hidden"}
+                    <Button variant={"secondary"} className={pageType === "Story"? "bg-[#1a8917] text-white hover:text-primary":"hidden"}
                         onClick={()=>{}}> Publish
+                    </Button>
+                    <Button variant={"secondary"}  className={pageType === "Profile"? "block":"hidden"}
+                        onClick={()=>{navigate('/sign')}}> Logout
                     </Button>
                     <a title="Write New Story" onClick={()=>{
                         navigate('/Story')
@@ -71,12 +75,14 @@ export const Appbar = ({pageType, toggle}: AppbarProps) =>{
                             <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clipRule="evenodd" />
                         </svg>
                     </a>
+                    <ModeToggle/>
                 </div>
 
                 <div className={pageType ==="Sign"?"flex flex-row justify-between relative": "hidden"}>
 
-                    <Button onClick={() => openCard("Signin")} className="hover:cursor-pointer mx-2 ">Signin</Button>
-                    <Button onClick={() => openCard("Signup")} className="hover:cursor-pointer mx-2">Signup</Button>
+                    <Button variant={"secondary"} onClick={() => openCard("Signin")} className="hover:cursor-pointer mx-2 ">Signin</Button>
+                    <Button variant={"secondary"} onClick={() => openCard("Signup")} className="hover:cursor-pointer mx-2">Signup</Button>
+                    <ModeToggle/>
 
                     {visible && (
                         <div

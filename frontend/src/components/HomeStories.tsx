@@ -7,7 +7,7 @@ export const HomeStories = () => {
 
     return (
         <div>
-          <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
+          <div className="mb-4 border-b border-border">
             <ul className="flex flex-wrap sticky top-0 -mb-px text-md font-medium text-center" role="tablist">
               {['For you', 'Featured'].map((tab) => (
                 <li key={tab} className="me-2" role="presentation">
@@ -31,7 +31,7 @@ export const HomeStories = () => {
       
           <div >
             {activeTab === 'For you' && (
-              <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800 [&>*]:my-10 [&>*]:border overflow-y-auto max-h-[calc(100vh-140px)]" role="tabpanel">
+              <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800 [&>*]:my-10 [&>*]:border-b [&>*]:border-border overflow-y-auto scrollbar-none max-h-[calc(100vh-140px)]" role="tabpanel">
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   This is some placeholder content the 
                   lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.

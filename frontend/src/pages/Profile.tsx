@@ -12,9 +12,9 @@ export const Profile = ({expanded, toggle}:toggleprop) => {
         <div>
             <Appbar toggle={toggle} pageType="Profile"/>
             <div>
-            <div className={`${expanded? "z-10 absolute transition-transform ease-in-out md:relative" : "hidden md:block relative transition-transform ease-in-out -translate-x-full"}`}>  
-                 <Sidebar/>
-                </div>
+            <div className={`transition-all duration-300 overflow-hidden ${expanded ? 'w-[70vw] md:w-[30vw]' : 'w-0'}`}>
+                    <Sidebar/>
+            </div>
             </div>
         </div>
     )

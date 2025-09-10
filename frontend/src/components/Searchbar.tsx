@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input"
 
-export default function SearchBarWithIcon() {
+export default function SearchBar() {
   return (
     <div className="relative w-80 ">
       <Input

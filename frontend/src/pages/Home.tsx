@@ -12,17 +12,15 @@ export const Home =({expanded, toggle}: toggleprop) => {
     return (
         <>
             <Appbar pageType="Home" toggle={toggle}/>
-            <div className="flex flex-row h-[calc(100vh-60px)]">
-                <div className={`${expanded? "z-10 absolute transition-transform ease-in-out md:relative" : "hidden md:block relative transition-transform ease-in-out -translate-x-full"}`}>  
-                 <Sidebar/>
+            <div className="flex flex-row relative h-[calc(100vh-60px)]">
+                <div className={`transition-all duration-300 overflow-hidden ${expanded ? 'w-[70vw] md:w-[30vw]' : 'w-0'}`}>
+                    <Sidebar/>
                 </div>
-                <div className="w-[90%] flex flex-row h-[calc(100vh-60px)] transition-transform ease-in-out">
-                    <div className="w-full md:65%">
-                    <div className="pl-10  h-auto border-x border-gray-200">
+                <div className="w-full justify-center flex flex-row h-[calc(100vh-60px)] transition-transform ease-in-out">
+                    <div className="w-full md:65% pl-10  h-auto">
                         <HomeStories/>
                     </div>
-                    </div>
-                    <div className="hidden md:block w-[35%] max-h-[calc(100vh-60px)] px-5 pt-10 overflow-y-auto ">
+                    <div className="hidden md:block bg-background text-primary w-[35%] max-h-[calc(100vh-60px)] px-5 pt-10 overflow-y-auto scrollbar-modern ">
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium consequuntur omnis, possimus natus dignissimos veniam. Eveniet dolorum saepe tenetur veniam quaerat fugit distinctio ipsum commodi laudantium eligendi, excepturi omnis rerum!
                         Odit dolorum provident est incidunt, neque ratione quo eaque illo odio praesentium maiores sint. Doloribus, totam exercitationem. Ipsum obcaecati provident voluptate quo ratione alias debitis! Incidunt velit dignissimos consequatur hic!
                         Atque dignissimos officia repellat omnis sunt, nobis accusantium dolorem perspiciatis? Inventore quam nemo, eius, eum ad assumenda qui, vel dolore necessitatibus minus laboriosam iure. Voluptas illo inventore architecto temporibus iste?

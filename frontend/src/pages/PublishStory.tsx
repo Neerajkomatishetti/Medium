@@ -1,12 +1,12 @@
 import { Appbar } from "@/components/Appbar"
-import { Stories } from "@/components/Stories"
+import { StoriesInput } from "@/components/StoriesInput"
 
 export const PublishStory =() => {
     return (
         <div>
             <Appbar pageType="Story"/>
             <div>
-                <Stories/>
+                <StoriesInput/>
             </div>
         </div>
     )
