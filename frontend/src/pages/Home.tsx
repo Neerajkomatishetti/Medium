@@ -1,13 +1,52 @@
 import { Appbar } from "@/components/Appbar"
 import { HomeStories } from "@/components/HomeStories"
 import { Sidebar } from "@/components/Sidebar";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import type { Post } from "@/components/HomeStories";
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 type toggleprop = {
     expanded?: boolean;
     toggle: () => void;
 }
 
+
+
 export const Home =({expanded, toggle}: toggleprop) => {
+
+    const token: string | null = localStorage.getItem('token');
+    const [body, setBody] = useState<{ Posts: Post[]}>({ Posts: []});
+
+    if(!token){
+        return <div>
+            <div className="flex h-screen w-screen justify-center items-center">
+                <h1>Not logged In</h1>
+            </div>
+        </div>
+    }
+
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(`${BACKEND_URL}/blog/bulk`, {
+                    headers: {
+                        Authorization: token
+                    }
+                });
+                setBody(res.data);
+                console.log(body)
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+    
+        fetchData();
+    }, []);
+    
 
     return (
         <>
@@ -16,9 +55,9 @@ export const Home =({expanded, toggle}: toggleprop) => {
                 <div className={`transition-all duration-300 overflow-hidden ${expanded ? 'absolute z-10 left-0 w-[65vw] lg:relative  lg:w-[30vw]' : ' absolute z-10 lg:relative w-0'}`}>
                     <Sidebar/>
                 </div>
-                <div className="w-full flex flex-row h-[calc(100vh-60px)] transition-transform ease-in-out">
+                <div className="w-full flex flex-row h-[calc(100vh-60px)] transition-transform ease-in-out ml-10 px-10">
                     <div className="flex justify-center w-full  pr-20  h-auto">
-                        <HomeStories/>
+                        <HomeStories Posts={body.Posts}/>
                     </div>
                     <div className="hidden lg:block bg-background text-primary w-90 max-h-[calc(100vh-60px)] px-5 pt-10 pr-10 overflow-y-auto scrollbar-modern ">
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium consequuntur omnis, possimus natus dignissimos veniam. Eveniet dolorum saepe tenetur veniam quaerat fugit distinctio ipsum commodi laudantium eligendi, excepturi omnis rerum!

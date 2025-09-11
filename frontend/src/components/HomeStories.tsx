@@ -1,13 +1,24 @@
 
 import { useState } from "react"
 
+export type Post = {
+  id: string;
+  title: string;
+  content: string;
+  published: boolean;
+  authorId: string;
+};
 
-export const HomeStories = () => {
+type PostsType = { 
+  Posts: Post[]
+};
+
+export const HomeStories = ({Posts}: PostsType) => {
     const [activeTab, setActiveTab] = useState('For you')
 
     return (
-        <div>
-          <div className="mb-4 w-[90%] border-b border-border">
+        <div className="w-full max-w-[60vw]">
+          <div className="mb-4 w-full border-b border-border">
             <ul className="flex flex-wrap sticky top-0 -mb-px text-md font-medium text-center" role="tablist">
               {['For you', 'Featured'].map((tab) => (
                 <li key={tab} className="me-2" role="presentation">
@@ -31,76 +42,30 @@ export const HomeStories = () => {
       
           <div >
             {activeTab === 'For you' && (
-              <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800 [&>*]:my-10 [&>*]:border-b [&>*]:border-border overflow-y-auto scrollbar-none max-h-[calc(100vh-140px)]" role="tabpanel">
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the 
-                  lorem*50<strong className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                </p>
+              <div className=" rounded-lg w-full bg-background [&>*]:my-10  overflow-y-auto scrollbar-none max-h-[calc(100vh-140px)]" role="tabpanel">
+                {Posts.map(post => {
+                  return <div className="flex flex-col h-fit w-full border-b bg-background border-border">
+                    <div className="flex justify-between">
+                      <div className="flex flex-col mx-5  w-full lg:w-[60%]">
+                          <div className="w-full min-h-10 h-fit py-2 border-b border-border font-bold">
+                            {post.title}
+                          </div>
+                          <p className="w-full min-h-20 h-fit py-2 ">
+                            {post.content}
+                          </p>
+                      </div>
+                      <div className="mx-2">
+                        <img className="max-h-30" src="/landscape-placeholder-svgrepo-com.svg" place-holder='blog photo' />
+                      </div>
+                    </div>
+
+                    </div>
+                })}
               </div>
             )}
             {activeTab === 'Featured' && (
-              <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800" role="tabpanel">
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+              <div className="p-4 rounded-lg bg-background" role="tabpanel">
+                <p className="text-sm ">
                   This is some placeholder content the <strong className="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</strong>.
                 </p>
               </div>

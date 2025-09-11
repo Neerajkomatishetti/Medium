@@ -25,6 +25,20 @@ userRouter.post('/signup', async (c) =>{
 
     if(Zodresult.success){
         try{
+
+            const usr = await Client.user.findFirst({
+                where:{
+                    email:body.email,
+                }
+            })
+        
+            if(usr){
+                return c.json({
+                    message:"user already exists"
+                });
+            }
+
+
             const user = await Client.user.create({
                 data:{
                     email:body.email,
@@ -68,31 +82,34 @@ userRouter.post('/signin', async (c) =>{
             const user = await Client.user.findFirst({
                 where:{
                     email:body.email,
-                    password:body.password,
-                    name:body.name
+                    password:body.password
                 }
             })
         
             if(user){
                 const token = await sign({ id:user.id }, c.env.JWT_SECRET);
-                return c.json({ token:token },200)
+                c.status(200);
+                return c.json({ token:token })
         
             }else{
+                c.status(400);
                 return c.json({
-                    message:"user doesnot exists"
-                }, 403)
+                    message:"wrong email or password "
+                })
             }
         
             }catch(e){
+                c.status(411)
                 return c.json({
                     message:"error while signing up"
-                }, 411)
+                })
             }
 
     }else{
+        c.status(400);
         return c.json({
-            error:Zodresult.error.issues[0].message
-        }, 400)
+            message:Zodresult.error.issues[0].message
+        })
     }
    
 })

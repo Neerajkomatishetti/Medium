@@ -18,7 +18,10 @@ blogRouter.use('/*',async (c, next) =>{
         const AuthHeader = c.req.header('Authorization') || "";
         
         try{
+            console.log(AuthHeader);
+            console.log("hi there");
             const user  = await verify(AuthHeader, c.env.JWT_SECRET);
+            console.log("hi there 2");
             if(user){
             const id = user.id as string;
             c.set("userId", id);
