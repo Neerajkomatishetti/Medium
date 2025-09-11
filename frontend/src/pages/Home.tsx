@@ -7,7 +7,7 @@ import type { Post } from "@/components/HomeStories";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-type toggleprop = {
+export type toggleprop = {
     expanded?: boolean;
     toggle: () => void;
 }
@@ -38,7 +38,6 @@ export const Home =({expanded, toggle}: toggleprop) => {
                     }
                 });
                 setBody(res.data);
-                console.log(body)
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -51,15 +50,16 @@ export const Home =({expanded, toggle}: toggleprop) => {
     return (
         <>
             <Appbar pageType="Home" toggle={toggle}/>
-            <div className="flex flex-row relative h-[calc(100vh-60px)]">
-                <div className={`transition-all duration-300 overflow-hidden ${expanded ? 'absolute z-10 left-0 w-[65vw] lg:relative  lg:w-[30vw]' : ' absolute z-10 lg:relative w-0'}`}>
+            <div className="flex flex-row  relative h-[calc(100vh-60px)]">
+                <div className={`transition-all duration-500 ease-in-out overflow-hidden ${expanded ? 'absolute z-20 left-0 w-[65vw] lg:relative  lg:w-[30vw]' : ' absolute z-10 lg:relative -left-80 w-0'}`}>
                     <Sidebar/>
                 </div>
-                <div className="w-full flex flex-row h-[calc(100vh-60px)] transition-transform ease-in-out ml-10 px-10">
-                    <div className="flex justify-center w-full  pr-20  h-auto">
+                <div className="w-full flex justify-center">
+                <div className="w-full lg:max-w-[80vw] flex flex-row h-[calc(100vh-60px)] px-5">
+                    <div className="flex justify-center w-full  h-auto">
                         <HomeStories Posts={body.Posts}/>
                     </div>
-                    <div className="hidden lg:block bg-background text-primary w-90 max-h-[calc(100vh-60px)] px-5 pt-10 pr-10 overflow-y-auto scrollbar-modern ">
+                    <div className="hidden lg:block bg-background text-primary border border-l ml-1 w-97 max-h-[calc(100vh-60px)] px-5 pt-10 pr-5 overflow-y-auto scrollbar-modern ">
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium consequuntur omnis, possimus natus dignissimos veniam. Eveniet dolorum saepe tenetur veniam quaerat fugit distinctio ipsum commodi laudantium eligendi, excepturi omnis rerum!
                         Odit dolorum provident est incidunt, neque ratione quo eaque illo odio praesentium maiores sint. Doloribus, totam exercitationem. Ipsum obcaecati provident voluptate quo ratione alias debitis! Incidunt velit dignissimos consequatur hic!
                         Atque dignissimos officia repellat omnis sunt, nobis accusantium dolorem perspiciatis? Inventore quam nemo, eius, eum ad assumenda qui, vel dolore necessitatibus minus laboriosam iure. Voluptas illo inventore architecto temporibus iste?
@@ -86,6 +86,7 @@ export const Home =({expanded, toggle}: toggleprop) => {
                         Nam saepe consequatur repellendus, vel autem laudantium, nobis aut voluptas possimus architecto assumenda suscipit, optio corporis temporibus voluptates tempore maxime quis? Vel dolore, dolor possimus illo praesentium eveniet suscipit est.
                         Quo, veritatis esse vero totam omnis reprehenderit placeat, soluta facilis molestiae quia a nisi, fugit nemo obcaecati velit exercitationem incidunt corporis perspiciatis vel. Omnis, autem dignissimos. Distinctio accusamus deleniti quasi!
                     </div>
+                </div>
                 </div>
             </div>
         </>

@@ -9,7 +9,7 @@ export type Post = {
   authorId: string;
 };
 
-type PostsType = { 
+export type PostsType = { 
   Posts: Post[]
 };
 
@@ -17,7 +17,7 @@ export const HomeStories = ({Posts}: PostsType) => {
     const [activeTab, setActiveTab] = useState('For you')
 
     return (
-        <div className="w-full max-w-[60vw]">
+        <div className="w-full">
           <div className="mb-4 w-full border-b border-border">
             <ul className="flex flex-wrap sticky top-0 -mb-px text-md font-medium text-center" role="tablist">
               {['For you', 'Featured'].map((tab) => (
@@ -42,12 +42,12 @@ export const HomeStories = ({Posts}: PostsType) => {
       
           <div >
             {activeTab === 'For you' && (
-              <div className=" rounded-lg w-full bg-background [&>*]:my-10  overflow-y-auto scrollbar-none max-h-[calc(100vh-140px)]" role="tabpanel">
+              <div className=" rounded-lg w-full bg-background [&>*]:my-10 border  overflow-y-auto scrollbar-none max-h-[calc(100vh-140px)]" role="tabpanel">
                 {Posts.map(post => {
-                  return <div className="flex flex-col h-fit w-full border-b bg-background border-border">
+                  return <div key={post.id} className="flex flex-col h-fit w-full border-b bg-background border-border">
                     <div className="flex justify-between">
                       <div className="flex flex-col mx-5  w-full lg:w-[60%]">
-                          <div className="w-full min-h-10 h-fit py-2 border-b border-border font-bold">
+                          <div className="w-full min-h-10 h-fit py-2 text-2xl font-bold">
                             {post.title}
                           </div>
                           <p className="w-full min-h-20 h-fit py-2 ">

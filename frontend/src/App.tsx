@@ -6,6 +6,7 @@ import { Profile } from './pages/Profile'
 import { PublishStory } from './pages/PublishStory'
 import { useState } from 'react'
 import { ThemeProvider } from "@/components/theme-provider"
+import { UserStories } from './pages/UserStories'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path='/' element={<Sign/>}/>
         <Route path='/Home' element={<Home expanded={expanded}  toggle={toggle}/>}/>
         <Route path='/Profile' element={<Profile expanded={expanded} toggle={toggle}/>}/>
+        <Route path='/UserStories' element={<UserStories expanded={expanded} toggle={toggle}/>}/>
         <Route path='/Story' element={<PublishStory/>}/>
       </Routes>
     </BrowserRouter>
