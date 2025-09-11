@@ -16,7 +16,8 @@ export const Sign = ()=> {
                 </div>
             </div>
             <div className="hidden md:block md:w-fit">
-                <img className="block bg-blend-color h-[calc(100vh-60px)]" src="./medium-bg-img.webp" alt="background image" />
+                <img className="block dark:hidden h-[calc(100vh-60px)]" src="./medium-bg-img.webp" alt="background image" />
+                <img className="hidden dark:block h-[calc(100vh-60px)]" src="./medium-image.png" alt="background image" />
             </div>
         </div>
         <Footer/>
