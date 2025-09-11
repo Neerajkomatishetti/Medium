@@ -20,7 +20,7 @@ function App() {
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
     <BrowserRouter>
       <Routes>
-        <Route path='/Sign' element={<Sign/>}/>
+        <Route path='/' element={<Sign/>}/>
         <Route path='/Home' element={<Home expanded={expanded}  toggle={toggle}/>}/>
         <Route path='/Profile' element={<Profile expanded={expanded} toggle={toggle}/>}/>
         <Route path='/Story' element={<PublishStory/>}/>
