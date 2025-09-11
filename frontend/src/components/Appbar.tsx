@@ -54,7 +54,7 @@ export const Appbar = ({pageType, toggle}: AppbarProps) =>{
                         onClick={()=>{}}> Publish
                     </Button>
                     <Button variant={"secondary"}  className={pageType === "Profile"? "block":"hidden"}
-                        onClick={()=>{navigate('/sign')}}> Logout
+                        onClick={()=>{navigate('/')}}> Logout
                     </Button>
                     <a title="Write New Story" onClick={()=>{
                         navigate('/Story')
