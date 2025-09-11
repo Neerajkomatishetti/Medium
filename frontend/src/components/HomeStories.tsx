@@ -7,7 +7,7 @@ export const HomeStories = () => {
 
     return (
         <div>
-          <div className="mb-4 border-b border-border">
+          <div className="mb-4 w-[90%] border-b border-border">
             <ul className="flex flex-wrap sticky top-0 -mb-px text-md font-medium text-center" role="tablist">
               {['For you', 'Featured'].map((tab) => (
                 <li key={tab} className="me-2" role="presentation">

@@ -13,14 +13,14 @@ export const Home =({expanded, toggle}: toggleprop) => {
         <>
             <Appbar pageType="Home" toggle={toggle}/>
             <div className="flex flex-row relative h-[calc(100vh-60px)]">
-                <div className={`transition-all duration-300 overflow-hidden ${expanded ? 'w-[70vw] md:w-[30vw]' : 'w-0'}`}>
+                <div className={`transition-all duration-300 overflow-hidden ${expanded ? 'absolute z-10 left-0 w-[65vw] lg:relative  lg:w-[30vw]' : ' absolute z-10 lg:relative w-0'}`}>
                     <Sidebar/>
                 </div>
-                <div className="w-full justify-center flex flex-row h-[calc(100vh-60px)] transition-transform ease-in-out">
-                    <div className="w-full md:65% pl-10  h-auto">
+                <div className="w-full flex flex-row h-[calc(100vh-60px)] transition-transform ease-in-out">
+                    <div className="flex justify-center w-full  pr-20  h-auto">
                         <HomeStories/>
                     </div>
-                    <div className="hidden md:block bg-background text-primary w-[35%] max-h-[calc(100vh-60px)] px-5 pt-10 overflow-y-auto scrollbar-modern ">
+                    <div className="hidden lg:block bg-background text-primary w-90 max-h-[calc(100vh-60px)] px-5 pt-10 pr-10 overflow-y-auto scrollbar-modern ">
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium consequuntur omnis, possimus natus dignissimos veniam. Eveniet dolorum saepe tenetur veniam quaerat fugit distinctio ipsum commodi laudantium eligendi, excepturi omnis rerum!
                         Odit dolorum provident est incidunt, neque ratione quo eaque illo odio praesentium maiores sint. Doloribus, totam exercitationem. Ipsum obcaecati provident voluptate quo ratione alias debitis! Incidunt velit dignissimos consequatur hic!
                         Atque dignissimos officia repellat omnis sunt, nobis accusantium dolorem perspiciatis? Inventore quam nemo, eius, eum ad assumenda qui, vel dolore necessitatibus minus laboriosam iure. Voluptas illo inventore architecto temporibus iste?
