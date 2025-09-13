@@ -12,7 +12,7 @@ type toggleprop = {
 }
 
 export const Profile = ({expanded, toggle}:toggleprop) => {
-    const [ProfileDetails, setProfileDetails] = useState<Profileprops['ProfileDetails']>({
+    const [ProfileDetails] = useState<Profileprops['ProfileDetails']>({
             name:"Neeraj Komatishetti",
             img_url:"/landscape-placeholder-svgrepo-com.svg",
             link:"./Profile"
