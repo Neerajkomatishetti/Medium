@@ -5,7 +5,17 @@ import { cors } from 'hono/cors'
 
 const app = new Hono()
 
-app.use(cors());
+app.use(
+    '/*',
+    cors({
+      // `c` is a `Context` object
+      origin: (origin, c) => {
+        return origin.endsWith('.app')
+          ? origin
+          : 'http://localhost:5173'
+      },
+    })
+  )
 
 app.route('/api/v1/user', userRouter);
 app.route('/api/v1/blog', blogRouter);

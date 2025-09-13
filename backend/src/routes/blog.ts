@@ -113,7 +113,8 @@ blogRouter.get('/bulk',async (c)=>{
 
 
     }catch(e){
-        return c.json({message:"error while fetching"}, 411)
+        c.status(400);
+        return c.json({message:"error while fetching"})
     }
 })
 
@@ -138,7 +139,8 @@ blogRouter.get('/userStories', async (c)=>{
         return c.json({Posts})
 
     }catch(e){
-        c.json({message:"error while fetching"}, 411)
+        c.status(400);
+        c.json({message:"error while fetching"})
     }
 })
 
@@ -158,8 +160,10 @@ blogRouter.get('/:id', async (c)=>{
 
         return c.json({Post})
 
+
     }catch(e){
-        c.json({message:"error while updating"}, 411)
+        c.status(500)
+        c.json({message:"error while updating"})
     }
 })
 
