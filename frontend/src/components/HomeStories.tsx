@@ -15,7 +15,7 @@ export type PostsType = {
 
 export const HomeStories = ({Posts}: PostsType) => {
     const [activeTab, setActiveTab] = useState('For you')
-
+    
     return (
         <div className="w-full">
           <div className="mb-4 w-full border-b border-border">

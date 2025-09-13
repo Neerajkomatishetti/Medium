@@ -5,6 +5,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import type { Post } from "@/components/HomeStories";
 import { jwtDecode } from "jwt-decode";
+import { HomeStoriesSkeleton } from "@/components/HomeStoriesSkeleton";
+
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -20,6 +22,7 @@ export const Home =({expanded, toggle}: toggleprop) => {
 
     const token: string = localStorage.getItem('token') ?? "";
     const [body, setBody] = useState<{ Posts: Post[]}>({ Posts: []});
+    const [loading, setLoading] = useState(true);
 
     // if(!token){
     //     return <div>
@@ -48,10 +51,13 @@ export const Home =({expanded, toggle}: toggleprop) => {
                 setBody(res.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
+            }finally{
+                setLoading(false);
             }
         };
     
         fetchData();
+
     }, []);
     
 
@@ -59,13 +65,13 @@ export const Home =({expanded, toggle}: toggleprop) => {
         <>
             <Appbar pageType="Home" toggle={toggle}/>
             <div className="flex flex-row  relative h-[calc(100vh-60px)]">
-                <div className={`transition-all duration-500 ease-in-out overflow-hidden ${expanded ? 'absolute z-20 left-0 w-[65vw] lg:relative  lg:w-[30vw]' : ' absolute z-10 lg:relative -left-80 w-0'}`}>
+                <div className={` transition-all duration-500 ease-in-out overflow-hidden ${expanded ? ' absolute z-20 left-0 w-[65vw] lg:relative  lg:w-[30vw]' : ' absolute z-10 lg:relative -left-80 w-0'}`}>
                     <Sidebar/>
                 </div>
                 <div className="w-full flex justify-center">
                 <div className="w-full lg:max-w-[80vw] flex flex-row h-[calc(100vh-60px)] px-5">
                     <div className="flex justify-center w-full  h-auto">
-                        <HomeStories Posts={body.Posts}/>
+                        {!loading? <HomeStories Posts={body.Posts}/>:<HomeStoriesSkeleton/>}
                     </div>
                     <div className="hidden lg:block bg-background text-primary border border-l ml-1 w-97 max-h-[calc(100vh-60px)] px-5 pt-10 pr-5 overflow-y-auto scrollbar-modern ">
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium consequuntur omnis, possimus natus dignissimos veniam. Eveniet dolorum saepe tenetur veniam quaerat fugit distinctio ipsum commodi laudantium eligendi, excepturi omnis rerum!

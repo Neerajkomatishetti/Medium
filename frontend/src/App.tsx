@@ -10,7 +10,7 @@ import { UserStories } from './pages/UserStories'
 
 //APP
 function App() {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
 
   const toggle = () => {
       setExpanded(expanded => !expanded);
