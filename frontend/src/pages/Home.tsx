@@ -4,7 +4,7 @@ import { Sidebar } from "@/components/Sidebar";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import type { Post } from "@/components/HomeStories";
-import { decode } from 'jsonwebtoken'
+import { jwtDecode } from "jwt-decode";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -33,9 +33,9 @@ export const Home =({expanded, toggle}: toggleprop) => {
 
     useEffect(() => {
 
-        const decodedtoken = decode(token) as { username?: string } | null;
+        const decodedtoken = jwtDecode(token) as { username?: string } | null;
         const username = decodedtoken?.username ?? "Anonymous";
-        
+
         localStorage.setItem('username', username);
 
         const fetchData = async () => {
