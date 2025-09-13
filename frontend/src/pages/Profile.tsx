@@ -2,7 +2,7 @@ import { Appbar } from "@/components/Appbar"
 import { HomeStories } from "@/components/HomeStories";
 import ProfileCard from "@/components/ProfileCard";
 import { Sidebar } from "@/components/Sidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Profileprops } from "@/components/ProfileCard";
 
 
@@ -12,13 +12,19 @@ type toggleprop = {
 }
 
 export const Profile = ({expanded, toggle}:toggleprop) => {
-    const [ProfileDetails] = useState<Profileprops['ProfileDetails']>({
-            name:"Neeraj Komatishetti",
+    const [ProfileDetails, setProfileDetails] = useState<Profileprops['ProfileDetails']>({
+            name:"Anonymous",
             img_url:"/landscape-placeholder-svgrepo-com.svg",
             link:"./Profile"
         })
+    useEffect(()=>{
+        setProfileDetails({
+            ...ProfileDetails,
+            name:localStorage.getItem('username') ?? "Anonymous"
+        })
+    },[])
 
-
+        
     return (
         <div>
             <Appbar toggle={toggle} pageType="Profile"/>
