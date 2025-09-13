@@ -1,6 +1,6 @@
 
 import { useState } from "react"
-import Skeleton, { Skeletn } from "./Skeletn"
+import { Skeletn } from "./Skeletn"
 
 
 
