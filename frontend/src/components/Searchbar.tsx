@@ -7,7 +7,7 @@ export default function SearchBar() {
         id="searchbar"
         type="text"
         placeholder="Search"
-        className="pl-12 pr-4 py-2 rounded-full"
+        className="pl-12 pr-4 py-2 border-0 bg-secondary rounded-full"
       />
     </div>
   )

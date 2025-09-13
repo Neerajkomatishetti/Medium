@@ -10,7 +10,7 @@ export type Post = {
 };
 
 export type PostsType = { 
-  Posts: Post[]
+  Posts?: Post[]
 };
 
 export const HomeStories = ({Posts}: PostsType) => {
@@ -19,8 +19,8 @@ export const HomeStories = ({Posts}: PostsType) => {
     return (
         <div className="w-full">
           <div className="mb-4 w-full border-b border-border">
-            <ul className="flex flex-wrap sticky top-0 -mb-px text-md font-medium text-center" role="tablist">
-              {['For you', 'Featured'].map((tab) => (
+            {Posts?<ul className="flex flex-wrap sticky top-0 -mb-px text-md font-medium text-center" role="tablist">
+              {["For you", "Featured"].map((tab) => (
                 <li key={tab} className="me-2" role="presentation">
                   <button
                     className={`inline-block p-4 border-b-2 rounded-t-lg ${
@@ -37,13 +37,33 @@ export const HomeStories = ({Posts}: PostsType) => {
                   </button>
                 </li>
               ))}
-            </ul>
+            </ul>:
+            <ul className="flex flex-wrap sticky top-0 -mb-px text-md font-medium text-center" role="tablist">
+            {["Home", "About"].map((tab) => (
+              <li key={tab} className="me-2" role="presentation">
+                <button
+                  className={`inline-block p-4 border-b-2 rounded-t-lg ${
+                    activeTab === tab
+                      ? 'border-blue-500 text-blue-600 dark:text-blue-500'
+                      : 'hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'
+                  }`}
+                  onClick={() => setActiveTab(tab)}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === tab}
+                >
+                  {tab}
+                </button>
+              </li>
+            ))}
+          </ul>
+            }
           </div>
       
           <div >
             {activeTab === 'For you' && (
-              <div className=" rounded-lg w-full bg-background [&>*]:my-10 border  overflow-y-auto scrollbar-none max-h-[calc(100vh-140px)]" role="tabpanel">
-                {Posts.map(post => {
+              <div className=" rounded-lg w-full bg-background [&>*]:my-10   overflow-y-auto scrollbar-none max-h-[calc(100vh-140px)]" role="tabpanel">
+                {Posts?.map(post => {
                   return <div key={post.id} className="flex flex-col h-fit w-full border-b bg-background border-border">
                     <div className="flex justify-between">
                       <div className="flex flex-col mx-5  w-full lg:w-[60%]">

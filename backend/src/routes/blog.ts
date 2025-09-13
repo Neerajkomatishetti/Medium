@@ -6,7 +6,7 @@ import { postInput, updateInput } from '@neerajkn123/common'
 
 export const blogRouter = new Hono<{
     Bindings:{
-        DATABASE_URL:string,
+        ACC_DATABASE_URL:string,
         JWT_SECRET:string
     },
     Variables:{
@@ -24,6 +24,7 @@ blogRouter.use('/*',async (c, next) =>{
             console.log("hi there 2");
             if(user){
             const id = user.id as string;
+            console.log(id)
             c.set("userId", id);
             return await next();
 
@@ -42,7 +43,7 @@ blogRouter.use('/*',async (c, next) =>{
 
 blogRouter.post('/',async (c)=>{
     const Client =new PrismaClient({
-    datasourceUrl:c.env.DATABASE_URL
+    datasourceUrl:c.env.ACC_DATABASE_URL
     }).$extends(withAccelerate())
 
     const body = await c.req.json();
@@ -73,7 +74,7 @@ blogRouter.post('/',async (c)=>{
 
 blogRouter.put('/',async (c)=>{
     const Client =new PrismaClient({
-        datasourceUrl:c.env.DATABASE_URL
+        datasourceUrl:c.env.ACC_DATABASE_URL
         }).$extends(withAccelerate())
 
     const body = await c.req.json();
@@ -102,7 +103,7 @@ blogRouter.put('/',async (c)=>{
 
 blogRouter.get('/bulk',async (c)=>{
     const Client =new PrismaClient({
-        datasourceUrl:c.env.DATABASE_URL
+        datasourceUrl:c.env.ACC_DATABASE_URL
         }).$extends(withAccelerate())
     
     try{
@@ -116,10 +117,35 @@ blogRouter.get('/bulk',async (c)=>{
     }
 })
 
+blogRouter.get('/userStories', async (c)=>{
+    const Client =new PrismaClient({
+        datasourceUrl:c.env.ACC_DATABASE_URL
+        }).$extends(withAccelerate())
+    
+    try{
+        const author_id = c.get('userId');
+        if (!author_id) {
+          return c.json({ message: 'Unauthorized' }, 401)
+        }
+        console.log(author_id)
+        const Posts = await Client.post.findMany({
+            where:{
+                authorId:author_id
+
+            }
+        })
+
+        return c.json({Posts})
+
+    }catch(e){
+        c.json({message:"error while fetching"}, 411)
+    }
+})
+
 
 blogRouter.get('/:id', async (c)=>{
     const Client =new PrismaClient({
-        datasourceUrl:c.env.DATABASE_URL
+        datasourceUrl:c.env.ACC_DATABASE_URL
         }).$extends(withAccelerate())
     
     try{
@@ -136,3 +162,5 @@ blogRouter.get('/:id', async (c)=>{
         c.json({message:"error while updating"}, 411)
     }
 })
+
+

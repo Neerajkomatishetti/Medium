@@ -15,7 +15,7 @@ export const UserStories = ({expanded, toggle}: toggleprop) => {
 
     const fetchData = async () => {
         try {
-            const res = await axios.get(`${BACKEND_URL}/blog/bulk`, {
+            const res = await axios.get(`${BACKEND_URL}/blog/userStories`, {
                 headers: {
                     Authorization: token
                 }
@@ -39,8 +39,8 @@ export const UserStories = ({expanded, toggle}: toggleprop) => {
             </div>
             <div className="flex flex-col items-center py-10 w-full max-h-[calc(100vh-60px)]  scrollbar-modern overflow-y-auto">
                 { userstories.map( (post:Post) =>{
-                    return <>
-                    <div className="flex flex-col mt-5 h-fit w-[95vw] lg:max-w-[60vw]  border shadow bg-background border-border ">
+                    return (
+                    <div key={post.id} className="flex flex-col mt-5 h-fit w-[95vw] lg:max-w-[60vw]  border shadow bg-background border-border ">
                         <div className="flex justify-between">
                         <div className="flex flex-col mx-5  w-full lg:w-[50%]">
                             <div className="w-full min-h-10 h-fit py-2 border-b border-border font-bold">
@@ -54,8 +54,7 @@ export const UserStories = ({expanded, toggle}: toggleprop) => {
                             <img className="max-h-30" src="/landscape-placeholder-svgrepo-com.svg" place-holder='blog photo' />
                         </div>
                         </div>
-                    </div>
-                    </>
+                    </div>)
                 }) }
 
             </div>

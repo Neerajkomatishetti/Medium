@@ -67,7 +67,7 @@ export const Sidebar =() =>{
                             </div>
                         </div>
                         <div className="flex w-full pl-4">
-                            <Button className="mr-2" variant={"secondary"} onClick={()=>{navigate('/sign')}}>
+                            <Button className="mr-2" variant={"secondary"} onClick={()=>{navigate('/')}}>
                                  Logout
                             </Button>
                             <ModeToggle/>

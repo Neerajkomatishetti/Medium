@@ -24,7 +24,8 @@ export const StoriesInput = () => {
                     })
                 }} 
                 value={story.title}
-                placeholder="Title"/>
+                placeholder="Title"
+                className="bg-secondary"/>
                 <Textarea onChange={(e) => {
                     setStory({
                         ...story,
@@ -32,7 +33,7 @@ export const StoriesInput = () => {
                     })
                 }}
                 value={story.content}
-                className="min-h-[30vh]" id="Story" placeholder="Write a Story"/>
+                className="min-h-[30vh] bg-secondary" id="Story" placeholder="Write a Story"/>
                 <Button onClick={async () =>{
                     const response = await axios.post(`${BACKEND_URL}/blog`, {
                             title:story.title,

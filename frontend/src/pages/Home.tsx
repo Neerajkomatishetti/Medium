@@ -19,13 +19,13 @@ export const Home =({expanded, toggle}: toggleprop) => {
     const token: string | null = localStorage.getItem('token');
     const [body, setBody] = useState<{ Posts: Post[]}>({ Posts: []});
 
-    if(!token){
-        return <div>
-            <div className="flex h-screen w-screen justify-center items-center">
-                <h1>Not logged In</h1>
-            </div>
-        </div>
-    }
+    // if(!token){
+    //     return <div>
+    //         <div className="flex h-screen w-screen justify-center items-center">
+    //             <h1>Not logged In</h1>
+    //         </div>
+    //     </div>
+    // }
 
 
 

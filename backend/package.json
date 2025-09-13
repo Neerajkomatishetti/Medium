@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "medium-backend",
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",

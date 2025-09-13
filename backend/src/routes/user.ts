@@ -7,7 +7,7 @@ import {signupInput} from '@neerajkn123/common';
 
 export const userRouter = new Hono<{
     Bindings:{
-        DATABASE_URL:string,
+        ACC_DATABASE_URL:string,
         JWT_SECRET:string
     }
 }>();
@@ -15,7 +15,7 @@ export const userRouter = new Hono<{
 
 userRouter.post('/signup', async (c) =>{
     const Client =new PrismaClient({
-        datasourceUrl:c.env.DATABASE_URL
+        datasourceUrl:c.env.ACC_DATABASE_URL
     }).$extends(withAccelerate())
     
 
@@ -71,7 +71,7 @@ userRouter.post('/signup', async (c) =>{
 
 userRouter.post('/signin', async (c) =>{
     const Client =new PrismaClient({
-        datasourceUrl:c.env.DATABASE_URL
+        datasourceUrl:c.env.ACC_DATABASE_URL
     }).$extends(withAccelerate())
     
     const body = await c.req.json();
