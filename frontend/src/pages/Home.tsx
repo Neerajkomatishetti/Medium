@@ -4,6 +4,7 @@ import { Sidebar } from "@/components/Sidebar";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import type { Post } from "@/components/HomeStories";
+import { decode } from 'jsonwebtoken'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -14,9 +15,10 @@ export type toggleprop = {
 
 
 
+
 export const Home =({expanded, toggle}: toggleprop) => {
 
-    const token: string | null = localStorage.getItem('token');
+    const token: string = localStorage.getItem('token') ?? "";
     const [body, setBody] = useState<{ Posts: Post[]}>({ Posts: []});
 
     // if(!token){
@@ -30,6 +32,12 @@ export const Home =({expanded, toggle}: toggleprop) => {
 
 
     useEffect(() => {
+
+        const decodedtoken = decode(token) as { username?: string } | null;
+        const username = decodedtoken?.username ?? "Anonymous";
+        
+        localStorage.setItem('username', username);
+
         const fetchData = async () => {
             try {
                 const res = await axios.get(`${BACKEND_URL}/blog/bulk`, {

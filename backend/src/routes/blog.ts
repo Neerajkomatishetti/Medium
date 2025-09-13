@@ -10,7 +10,8 @@ export const blogRouter = new Hono<{
         JWT_SECRET:string
     },
     Variables:{
-        userId:string
+        userId:string,
+        username:string
     }
 }>();
 
@@ -24,8 +25,10 @@ blogRouter.use('/*',async (c, next) =>{
             console.log("hi there 2");
             if(user){
             const id = user.id as string;
+            const username = user.name as string;
             console.log(id)
             c.set("userId", id);
+            c.set('username', username)
             return await next();
 
             }else{

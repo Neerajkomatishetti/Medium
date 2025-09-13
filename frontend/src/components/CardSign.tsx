@@ -90,9 +90,7 @@ export function CardSign({type, toggleCard} : CardSignProps) {
       <CardFooter className="flex-col gap-2">
         <Button  onClick={
               async () =>{
-                      if(name){
-                        localStorage.setItem('username', name);
-                      }
+
                       const Signtype: string = type.toLowerCase();
 
                       if(password.length < 6){
