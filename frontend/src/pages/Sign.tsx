@@ -12,7 +12,9 @@ export const Sign = ()=> {
                 <h1 className=" font-heavy text-5xl md:text-8xl">Human</h1>
                 <h1 className=" font-heavy text-5xl md:text-8xl">stories & ideas</h1>
                 <p className="font-p mt-5">A place to read, write, and deepen your understanding</p>
-                <Button className="mt-5">Start Reading</Button>
+                <Button onClick={()=>{
+                    alert("login to Read!")
+                }} className="mt-5">Start Reading</Button>
                 </div>
             </div>
             <div className="hidden md:block md:w-fit">
