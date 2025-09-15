@@ -64,8 +64,8 @@ export const Home =({expanded, toggle}: toggleprop) => {
     return (
         <>
             <Appbar pageType="Home" toggle={toggle}/>
-            <div className="flex flex-row  relative max-h-[calc(100vh-60px)]">
-                <div className={` transition-all duration-500 ease-in-out overflow-hidden ${expanded ? ' absolute z-20 left-0 w-[65vw] lg:relative  lg:w-[30vw]' : ' absolute z-10 lg:relative -left-80 w-0'}`}>
+            <div className="flex flex-row  relative max-h-[calc(100vh-30vh)]">
+                <div className={` transition-all duration-500 ease-in-out overflow-hidden ${expanded ? ' absolute z-10 left-0 w-[65vw] lg:relative  lg:w-[30vw]' : ' absolute z-10 lg:relative -left-80 w-0'}`}>
                     <Sidebar/>
                 </div>
                 <div className="w-full flex justify-center">
